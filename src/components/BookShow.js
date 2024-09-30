@@ -27,7 +27,7 @@ export default function BookShow({ book }) {
 
   return (
     <div className="book-show">
-      <img alt="books" src={`https://picsum.photos/seed/${book.id}/300/200`} />
+      <img alt="books" src={book.image} />
       <div>{content}</div>
       <div className="actions">
         <button className="edit" onClick={handleEditClick}>

@@ -2,7 +2,7 @@ import { useState } from "react";
 import useBooksContext from "../hooks/use-books-context";
 
 export default function BookCreate() {
-  const { handleCreateBook, fetchGoogleBooks } = useBooksContext();
+  const { fetchGoogleBooks } = useBooksContext();
 
   const [title, setTitle] = useState("");
 
@@ -12,7 +12,6 @@ export default function BookCreate() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleCreateBook(title);
     fetchGoogleBooks(title);
     setTitle("");
   };

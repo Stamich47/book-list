@@ -1,3 +1,30 @@
+.nav {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.nav-tab {
+  padding: 10px 20px;
+  margin: 0 5px;
+  border: 1px solid #ddd;
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+  background-color: #f8f8f8;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.nav-tab:hover {
+  background-color: #e0e0e0;
+}
+
+.nav-tab.active {
+  background-color: #ffffff;
+  border-bottom: 1px solid #ffffff;
+  font-weight: bold;
+}
+
 .book-list {
   display: flex;
   justify-content: start;

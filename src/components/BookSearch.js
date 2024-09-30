@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import useBooksContext from "../hooks/use-books-context";
 
 export default function BookSearch() {
@@ -12,6 +12,9 @@ export default function BookSearch() {
   };
 
   const handleAddBook = (book) => {
+    if (!book.id) {
+      return;
+    }
     addBook(book);
   };
 
