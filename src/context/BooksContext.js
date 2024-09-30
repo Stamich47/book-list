@@ -6,6 +6,28 @@ const BooksContext = createContext();
 function Provider({ children }) {
   const [books, setBooks] = useState([]);
 
+  const API_KEY = process.env.REACT_APP_BOOKS_API;
+
+  const fetchGoogleBooks = async (title) => {
+    const response = await axios.get(
+      `https://www.googleapis.com/books/v1/volumes?q=${title}&key=${API_KEY}`
+    );
+    return response.data.items.map((item) => {
+      return {
+        title: item.volumeInfo.title,
+        authors: item.volumeInfo.authors,
+        description: item.volumeInfo.description,
+        image: item.volumeInfo.imageLinks.thumbnail,
+        id: item.id,
+      };
+    });
+  };
+
+  const addBook = (book) => {
+    setBooks((prevBooks) => [...prevBooks, book]);
+    console.log(books);
+  };
+
   const fetchBooks = useCallback(async () => {
     const response = await axios.get("http://localhost:3001/books");
     setBooks(response.data);
@@ -48,6 +70,8 @@ function Provider({ children }) {
     handleCreateBook,
     deleteBookById,
     editBookById,
+    fetchGoogleBooks,
+    addBook,
   };
 
   return (
