@@ -32,44 +32,85 @@ function Provider({ children }) {
     });
   };
 
+  // *******POSTING AND GETTING DATA FROM LOCAL STORAGE*****
   const addBook = async (book) => {
-    const response = await axios.post("http://localhost:3001/books", {
+    const books = JSON.parse(localStorage.getItem("books")) || [];
+    const newBook = {
       id: book.id,
       title: book.title,
       authors: book.authors,
       image: book.image,
-    });
-    setBooks([...books, response.data]);
+      description: book.description,
+    };
+    books.push(newBook);
+    localStorage.setItem("books", JSON.stringify(books));
+    setBooks(books);
   };
 
   const fetchBooks = useCallback(async () => {
-    const response = await axios.get("http://localhost:3001/books");
-    setBooks(response.data);
+    const books = JSON.parse(localStorage.getItem("books")) || [];
+    setBooks(books);
   }, []);
 
   const deleteBookById = async (id) => {
-    await axios.delete(`http://localhost:3001/books/${id}`);
-
-    const updatedBooks = books.filter((book) => {
-      return book.id !== id;
-    });
-    setBooks(updatedBooks);
+    let books = JSON.parse(localStorage.getItem("books")) || [];
+    books = books.filter((book) => book.id !== id);
+    localStorage.setItem("books", JSON.stringify(books));
+    setBooks(books);
   };
 
   const editBookById = async (id, newTitle) => {
-    const response = await axios.put(`http://localhost:3001/books/${id}`, {
-      title: newTitle,
-    });
-
-    const updatedBooks = books.map((book) => {
+    let books = JSON.parse(localStorage.getItem("books")) || [];
+    books = books.map((book) => {
       if (book.id === id) {
-        return { ...book, ...response.data };
-      } else {
-        return book;
+        return { ...book, title: newTitle };
       }
+      return book;
     });
-    setBooks(updatedBooks);
+    localStorage.setItem("books", JSON.stringify(books));
+    setBooks(books);
   };
+
+  // *******POSTING AND GETTING DATA FROM LOCALHOST*****
+  // const addBook = async (book) => {
+  //   const response = await axios.post("http://localhost:3001/books", {
+  //     id: book.id,
+  //     title: book.title,
+  //     authors: book.authors,
+  //     image: book.image,
+  //     description: book.description,
+  //   });
+  //   setBooks([...books, response.data]);
+  // };
+
+  // const fetchBooks = useCallback(async () => {
+  //   const response = await axios.get("http://localhost:3001/books");
+  //   setBooks(response.data);
+  // }, []);
+
+  // const deleteBookById = async (id) => {
+  //   await axios.delete(`http://localhost:3001/books/${id}`);
+
+  //   const updatedBooks = books.filter((book) => {
+  //     return book.id !== id;
+  //   });
+  //   setBooks(updatedBooks);
+  // };
+
+  // const editBookById = async (id, newTitle) => {
+  //   const response = await axios.put(`http://localhost:3001/books/${id}`, {
+  //     title: newTitle,
+  //   });
+
+  //   const updatedBooks = books.map((book) => {
+  //     if (book.id === id) {
+  //       return { ...book, ...response.data };
+  //     } else {
+  //       return book;
+  //     }
+  //   });
+  //   setBooks(updatedBooks);
+  // };
 
   const valueToShare = {
     books,

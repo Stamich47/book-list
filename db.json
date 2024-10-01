@@ -1,3 +1,20 @@
 {
-  "books": []
+  "books": [
+    {
+      "id": "5iTebBW-w7QC",
+      "title": "Harry Potter and the Chamber of Secrets",
+      "authors": [
+        "J.K. Rowling"
+      ],
+      "image": "http://books.google.com/books/content?id=5iTebBW-w7QC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+    },
+    {
+      "id": "Sm5AKLXKxHgC",
+      "title": "Harry Potter and the Prisoner of Azkaban",
+      "authors": [
+        "J.K. Rowling"
+      ],
+      "image": "http://books.google.com/books/content?id=Sm5AKLXKxHgC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+    }
+  ]
 }
