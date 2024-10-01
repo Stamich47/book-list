@@ -19,13 +19,15 @@ function Provider({ children }) {
       return [{ id: 0, title: "No Results Found 😞", image: defaultImage }];
     }
 
+    console.log(response.data.items);
+
     return response.data.items.map((item) => {
       return {
         title: item.volumeInfo.title,
         authors: item.volumeInfo.authors,
         description: item.volumeInfo.description,
         image: item.volumeInfo.imageLinks
-          ? item.volumeInfo.imageLinks.thumbnail
+          ? `https://books.google.com/books/content?id=${item.id}&printsec=frontcover&img=1&zoom=0&edge=curl&source=gbs_api`
           : defaultImage,
         id: item.id,
       };
