@@ -19,8 +19,6 @@ function Provider({ children }) {
       return [{ id: 0, title: "No Results Found 😞", image: defaultImage }];
     }
 
-    console.log(response.data.items);
-
     return response.data.items.map((item) => {
       return {
         title: item.volumeInfo.title,
@@ -44,6 +42,11 @@ function Provider({ children }) {
       image: book.image,
       description: book.description,
     };
+
+    if (books.find((b) => b.id === newBook.id)) {
+      return alert("Book already exists in your Book List");
+    }
+
     books.push(newBook);
     localStorage.setItem("books", JSON.stringify(books));
     setBooks(books);
@@ -117,7 +120,6 @@ function Provider({ children }) {
   const valueToShare = {
     books,
     fetchBooks,
-
     deleteBookById,
     editBookById,
     fetchGoogleBooks,

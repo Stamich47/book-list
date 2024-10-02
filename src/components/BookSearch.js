@@ -11,6 +11,12 @@ export default function BookSearch() {
     setResults(results);
   };
 
+  const handleEnterKeySearch = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
+
   const handleAddBook = (book) => {
     if (!book.id) {
       return;
@@ -24,9 +30,12 @@ export default function BookSearch() {
         type="text"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
+        onKeyDown={handleEnterKeySearch}
         placeholder="Enter Book Title..."
       />
-      <button onClick={handleSearch}>Search</button>
+      <button type="" onClick={handleSearch}>
+        Search
+      </button>
       <div className="book-results">
         {results.map((book) => (
           <div
@@ -34,8 +43,10 @@ export default function BookSearch() {
             className="book-card"
             onClick={() => handleAddBook(book)}
           >
-            <h3>{book.title}</h3>
-            <p>{book.authors?.join(", ")}</p>
+            <div>
+              <h3>{book.title}</h3>
+              <p>{book.authors?.join(", ")}</p>
+            </div>
             {book.image && <img src={book.image} alt={book.title} />}
           </div>
         ))}
