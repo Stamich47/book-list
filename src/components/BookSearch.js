@@ -9,6 +9,7 @@ export default function BookSearch() {
   const handleSearch = async () => {
     const results = await fetchGoogleBooks(title);
     setResults(results);
+    setTitle("");
   };
 
   const handleEnterKeySearch = (e) => {
